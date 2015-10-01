@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+
+<div class="row">
+	{{#files}}
+		<div class="col-md-3">
+			<a href="{{fileUrl}}{{filename}}">
+				<div class="well document">
+					<div><span class="glyphicon {{#if this.isFolder}}glyphicon-folder-open{{else}} glyphicon-list-alt{{/if}}"></span></div>
+					<legend>{{this.filename}}</legend>
+				</div>
+			</a>
+		</div>
+	{{/files}}
+</div>

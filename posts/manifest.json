@@ -1,0 +1,8 @@
+{
+	"posts" : [
+	{
+		"title": "first",
+		"description": "this is the first post",
+		"filename": "first.md"
+	}]
+}

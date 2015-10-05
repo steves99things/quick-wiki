@@ -19,15 +19,36 @@ router.get('/files', function(req, res, next) {
 	});
 });
 
+// GET posts page
 var postHelper = new PostHelper();
-postHelper.getPosts(function(manifest) {
-	router.get('/posts', function(req, res, next) {
+router.get('/posts', function(req, res, next) {
+	postHelper.getManifest(function(manifest) {
 		res.render('posts', {
 			title: 'Posts',
 			posts: manifest.posts
 		});
 	});
 });
+
+// CREATE a post
+router.post('/posts', function(req, res) {
+	var post = {};
+	if (req.body.title) post.title = req.body.title;
+	if (req.body.description) post.description = req.body.description;
+	if (req.body.filename) post.filename = req.body.filename;
+
+	postHelper.addPost(post);
+
+	res.redirect('posts');
+});
+
+
+// add the post to our manifest to see if it works
+var post = {
+	'title' : 'test post', 
+	'description' : 'this is a description of a test post', 
+	'filename' : 'test123.md'
+};
 
 
 module.exports = router;

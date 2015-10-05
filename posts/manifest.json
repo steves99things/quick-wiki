@@ -1,8 +1,29 @@
 {
-	"posts" : [
-	{
-		"title": "first",
-		"description": "this is the first post",
-		"filename": "first.md"
-	}]
+    "posts": [
+        {
+            "title": "awesome",
+            "description": "this is a description of an awesome post",
+            "filename": "first.md"
+        },
+        {
+            "title": "test post",
+            "description": "this is a description of a test post",
+            "filename": "test123.md"
+        },
+        {
+            "title": "test post",
+            "description": "this is a description of a test post",
+            "filename": "test1234.md"
+        },
+        {
+            "title": "test post",
+            "description": "this is a description of a test post",
+            "filename": "test123.md"
+        }, 
+        {
+            "title": "title",
+            "description": "sec",
+            "filename": "ajis.ji"
+        }
+    ]
 }

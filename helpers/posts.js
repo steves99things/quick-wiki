@@ -6,10 +6,11 @@ var _scope = this;
 
 var PostHelper = function() {
 	var _self = this;
-	var loc = path.join(__dirname, '/../posts/manifest.json');
+	var postPath = path.join(__dirname, '/../posts/')
+	var manifestPath = path.join(__dirname, '/../posts/manifest.json');
 
 	this.getManifest = function(callback) {
-		fs.readFile(loc, 'utf8', function(err, data) {
+		fs.readFile(manifestPath, 'utf8', function(err, data) {
 
 			if (callback) {
 				callback(JSON.parse(data));
@@ -22,10 +23,26 @@ var PostHelper = function() {
 		_self.getManifest(function(manifest) {
 			manifest.posts.push(post);
 
-			fs.writeFile(loc, JSON.stringify(manifest, null, 4), function(err) {
+			fs.writeFile(manifestPath, JSON.stringify(manifest, null, 4), function(err) {
 				if (err) throw err;
-				console.log('did it work?');
 			});
+		});
+	};
+
+	this.getPostByIndex = function(index, callback) {
+		_self.getManifest(function(manifest) {
+			if (callback) {
+				callback(manifest, manifest.posts[index]);
+			}
+		});
+	};
+
+	this.getPostContent = function(filename, callback) {
+		fs.readFile(path.join(postPath, filename), 'utf8', function(err, data) {
+			if (err) console.error(err.stack);
+			if (callback) {
+				callback(data);
+			}
 		});
 	};
 };

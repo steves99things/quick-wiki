@@ -1,0 +1,36 @@
+@sidebar-width: 220px;
+@main-width: 660px;
+@white: #fff;
+
+.sidebar {
+	position: fixed;
+	background-color: @gray-lighter;
+	width: @sidebar-width;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+.sidebar li {
+	padding: (@padding-base-vertical / 2) @padding-base-horizontal;
+	margin: 0 -(@padding-base-horizontal);
+
+	&.active {
+		border-left: 5px solid @gray-light;
+		padding-left: @padding-base-horizontal - 5;
+		background-color: @white;
+		a { 
+			color: @gray-dark; 
+			text-decoration: none;
+			cursor: default;
+		}
+	}
+}
+.main {
+	position: absolute;
+	left: @sidebar-width;
+	max-width: @main-width;
+}

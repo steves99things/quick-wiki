@@ -1,8 +1,9 @@
 <h1>{{description}}</h1>
 
-<table class="table">
+<table class="table table-striped">
 	<thead>
 		<tr>
+			<th>#</th>
 			<th>Title</th>
 			<th>Description</th>
 			<th>Filename</th>
@@ -11,7 +12,8 @@
 	<tbody>
 		{{#posts}}
 			<tr>
-				<td>{{this.title}}</td>
+				<td>{{@index}}</td>
+				<td><a href="/posts/{{@index}}">{{this.title}}</a></td>
 				<td>{{this.description}}</td>
 				<td>{{this.filename}}</td>
 			</tr>

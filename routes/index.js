@@ -42,13 +42,26 @@ router.post('/posts', function(req, res) {
 	res.redirect('posts');
 });
 
+// GET a post
+router.get('/posts/:index', function(req, res) {
+	var postIndex = req.params.index;
+	postHelper.getPostByIndex(postIndex, function(manifest, post) {
+		postHelper.getPostContent(post.filename, function(content) {
+			res.render('detail/post', {
+				layout: 'detail/detail-layout',
+				posts: manifest.posts,
+				title: post.title,
+				content: content,
+				activeIndex: postIndex
+			});
+		});
+	});
+});
 
-// add the post to our manifest to see if it works
-var post = {
-	'title' : 'test post', 
-	'description' : 'this is a description of a test post', 
-	'filename' : 'test123.md'
-};
+// EDIT a post
+router.put('/posts/:filename', function(req, res) {
+
+});
 
 
 module.exports = router;

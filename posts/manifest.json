@@ -3,27 +3,22 @@
         {
             "title": "awesome",
             "description": "this is a description of an awesome post",
-            "filename": "first.md"
+            "filename": "first.html"
         },
         {
             "title": "test post",
             "description": "this is a description of a test post",
-            "filename": "test123.md"
+            "filename": "first.html"
         },
         {
-            "title": "test post",
-            "description": "this is a description of a test post",
+            "title": "Broken Content",
+            "description": "This one won't work because the file's missing",
             "filename": "test1234.md"
         },
         {
             "title": "test post",
             "description": "this is a description of a test post",
-            "filename": "test123.md"
-        }, 
-        {
-            "title": "title",
-            "description": "sec",
-            "filename": "ajis.ji "
+            "filename": "first.html"
         }
     ]
 }

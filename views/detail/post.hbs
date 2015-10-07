@@ -1,25 +1,64 @@
 <h2>{{post.title}}</h2>
-<h3>{{post.description}}</h3>
+
 
 {{!-- normally, it might be dangerous to allow users to publish unescaped content, but this is on the local file system... so we'll see what happens --}}
 
 <form action="/posts/{{activeIndex}}" method="post">
+	<button type="submit" class="btn btn-primary pull-right">Save</button>
+	<h3>{{post.description}}</h3>
 	<div contentEditable id="content">{{{content}}}</div>
 	<input type="hidden" name="content" id="content-input">
 	<input type="hidden" name="filename" id="filename-input" value="{{post.filename}}">
 	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 
+<input id="test" type="text" value="Select me!" />
+
 <script>
 	(function() {
-		window.addEventListener('load', function() {
+		window.addEventListener('load', function(event) {
 			var content = document.getElementById('content');
 			var contentInput = document.getElementById('content-input');
-			contentInput.value = content.innerHTML;
-			
-			content.addEventListener('keydown', function(event){
+
+			function setContent(event) {
 				contentInput.value = content.innerHTML;
+			}
+
+			// neither one of these works right yet
+			// this one adds weird spacing to block items when stopped mid-selection
+			function makeTextBold(event) {
+				var selObj = window.getSelection();
+				console.log(selObj);
+				var objRange = selObj.getRangeAt(0);
+				console.log(objRange);
+
+				var newNode = document.createElement('strong');
+				newNode.appendChild(objRange.extractContents());
+				console.log(newNode);
+				objRange.insertNode(newNode);
+			}
+
+			// this one doesn't work across html elements
+			function makeTextBold(event) {
+				var selObj = window.getSelection();
+				console.log(selObj);
+				var objRange = selObj.getRangeAt(0);
+				console.log(objRange);
+
+				var newNode = document.createElement('strong');
+				objRange.surroundContents(newNode);
+
+			}
+
+			content.addEventListener('mouseup', function(event) {
+				makeTextBold(event);
+				
 			}, false);
+
+			// initiate content and set listeners
+			setContent();
+			content.addEventListener('keyup', setContent, false);
+			content.addEventListener('blur', setContent, false);
 		}, false);
 	})();
 </script>

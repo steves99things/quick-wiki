@@ -50,7 +50,7 @@ router.get('/posts/:index', function(req, res) {
 			res.render('detail/post', {
 				layout: 'detail/detail-layout',
 				posts: manifest.posts,
-				title: post.title,
+				post: post,
 				content: content,
 				activeIndex: postIndex
 			});
@@ -59,8 +59,20 @@ router.get('/posts/:index', function(req, res) {
 });
 
 // EDIT a post
-router.put('/posts/:filename', function(req, res) {
+router.post('/posts/:index', function(req, res) {
+	var post = {};
+	var postIndex = req.params.index;
 
+	if (req.body.content) post.content = req.body.content;
+	if (req.body.filename) post.filename = req.body.filename;
+
+	console.log(post);
+
+	postHelper.setPostContent(post.filename, post.content, function() {
+		console.log('success');
+	});
+
+	res.redirect('/posts/' + postIndex);
 });
 
 

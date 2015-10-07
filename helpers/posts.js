@@ -6,7 +6,7 @@ var _scope = this;
 
 var PostHelper = function() {
 	var _self = this;
-	var postPath = path.join(__dirname, '/../posts/')
+	var postPath = path.join(__dirname, '/../posts/');
 	var manifestPath = path.join(__dirname, '/../posts/manifest.json');
 
 	this.getManifest = function(callback) {
@@ -42,6 +42,15 @@ var PostHelper = function() {
 			if (err) console.error(err.stack);
 			if (callback) {
 				callback(data);
+			}
+		});
+	};
+
+	this.setPostContent = function(filename, content, callback) {
+		fs.writeFile(path.join(postPath, filename), content, function(err) {
+			if (err) console.error(err.stack);
+			if (callback) {
+				callback();
 			}
 		});
 	};

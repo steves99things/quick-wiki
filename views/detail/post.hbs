@@ -1,6 +1,25 @@
-<h2>{{title}}</h2>
-<h3>{{this.title}}</h3>
+<h2>{{post.title}}</h2>
+<h3>{{post.description}}</h3>
 
 {{!-- normally, it might be dangerous to allow users to publish unescaped content, but this is on the local file system... so we'll see what happens --}}
 
-<div contentEditable>{{{content}}}</div>
+<form action="/posts/{{activeIndex}}" method="post">
+	<div contentEditable id="content">{{{content}}}</div>
+	<input type="hidden" name="content" id="content-input">
+	<input type="hidden" name="filename" id="filename-input" value="{{post.filename}}">
+	<button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<script>
+	(function() {
+		window.addEventListener('load', function() {
+			var content = document.getElementById('content');
+			var contentInput = document.getElementById('content-input');
+			contentInput.value = content.innerHTML;
+			
+			content.addEventListener('keydown', function(event){
+				contentInput.value = content.innerHTML;
+			}, false);
+		}, false);
+	})();
+</script>
